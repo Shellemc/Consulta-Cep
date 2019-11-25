@@ -1,20 +1,23 @@
 import requests
 
+
+def buscar_cep(cep):
+    response = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep))
+    response_data = response.json()
+    return response_data
+
 def main():
     print('####################')
     print('### Consulta CEP ###')
     print('####################')
     print()
 
-    cep_input = input('Digite o CEP para a consulta: ')
-    if len(cep_input) != 8:
+    cep = input('Digite o CEP para a consulta: ')
+    if len(cep) != 8:
         print('Quantidade de digitos invalidos!')
         exit()
 
-    request = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep_input))
-
-    address_data = request.json()
-
+    address_data = buscar_cep(cep)
     if 'erro' not in address_data:
         print('==> CEP ENCONTRADO <==')
 
@@ -26,7 +29,7 @@ def main():
         print('Estado: {}'.format(address_data['uf']))
 
     else:
-        print('{}: CEP invalido'.format(cep_input))
+        print('{}: CEP invalido'.format(cep))
 
     print("-----------------------------------------------")
     option = int(input('Deseja realizar uma nova consulta?\n1.Sim\n2.Não\n==> '))
