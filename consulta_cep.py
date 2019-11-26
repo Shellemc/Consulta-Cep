@@ -14,19 +14,20 @@ def main():
 
     cep = input('Digite o CEP para a consulta: ')
     if len(cep) != 8:
-        print('Quantidade de digitos invalidos!')
-        exit()
+        exit('Quantidade de digitos invalidos!')
 
     address_data = buscar_cep(cep)
     if 'erro' not in address_data:
-        print('==> CEP ENCONTRADO <==')
-
-        print('CEP: {}'.format(address_data['cep']))
-        print('Logradouro: {}'.format(address_data['logradouro']))
-        print('Complemento: {}'.format(address_data['complemento']))
-        print('Bairro: {}'.format(address_data['bairro']))
-        print('Cidade: {}'.format(address_data['localidade']))
-        print('Estado: {}'.format(address_data['uf']))
+        info_cep = """
+        ==> CEP ENCONTRADO <==
+        CEP: {cep}
+        Logradouro: {logradouro}
+        Complemento: {complemento}
+        Bairro: {bairro}
+        Cidade: {localidade}
+        Estado: {uf}
+        """
+        print(info_cep.format(**address_data))
 
     else:
         print('{}: CEP invalido'.format(cep))
