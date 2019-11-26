@@ -14,8 +14,7 @@ def main():
 
     cep = input('Digite o CEP para a consulta: ')
     if len(cep) != 8:
-        print('Quantidade de digitos invalidos!')
-        exit()
+        exit('Quantidade de digitos invalidos!')
 
     address_data = buscar_cep(cep)
     if 'erro' not in address_data:
